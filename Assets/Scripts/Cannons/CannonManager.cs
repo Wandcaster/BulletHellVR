@@ -26,6 +26,9 @@ public class CannonManager : MonoBehaviour
     private bool[] freeCannon;
 
 
+    [SerializeField] private GameObject targetFolder;
+    private int targetPoints;
+
     //TODO: zoptymalizuj, usun resp 2 kul w tym samym miejscu
     private GameObject ChooseRandomCannon() {
         int id;
@@ -74,6 +77,8 @@ public class CannonManager : MonoBehaviour
         {
             freeCannon[i] = true;
         }
+      
+        targetPoints = targetFolder.transform.childCount;
     }
 
     // Start is called before the first frame update
@@ -101,9 +106,15 @@ public class CannonManager : MonoBehaviour
     IEnumerator ShotPlayer(float delay, Transform playerPosition, float force, Vector3 spawnPos)
     {
         //Debug.Log("ShotPlayer");
+
+        Transform target = targetFolder.transform.Find("TargetPoint"+rand.Next(targetPoints));
+//        Debug.Log();
+
         yield return new WaitForSeconds(delay);
         GameObject tmp = Instantiate(bullet, spawnPos, Quaternion.identity);
         tmp.SetActive(true);
+        tmp.GetComponent<Shot>().Shoot(target);
+
         currentBullets--;
         //Debug.Log("Bang");
 
