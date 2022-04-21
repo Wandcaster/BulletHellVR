@@ -110,16 +110,20 @@ public class CannonManager : MonoBehaviour
         Transform target = targetFolder.transform.Find("TargetPoint"+rand.Next(targetPoints));
 //        Debug.Log();
 
+
         yield return new WaitForSeconds(delay);
         GameObject tmp = Instantiate(bullet, spawnPos, Quaternion.identity);
         tmp.SetActive(true);
         tmp.GetComponent<Shot>().Shoot(target);
 
+
+
+
         currentBullets--;
         //Debug.Log("Bang");
 
         yield return new WaitForSeconds(10);
-        Destroy(tmp);
+        Destroy(tmp,10);
 
     }
 
