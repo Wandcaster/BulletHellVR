@@ -8,6 +8,10 @@ public class Shot : MonoBehaviour
     [SerializeField]
     AudioClip hitAudio;
 
+
+    public delegate void Hit();
+    public event Hit hit;
+
     public void Shoot(Transform target)
     {
 //        Debug.Log(target);
@@ -22,6 +26,7 @@ public class Shot : MonoBehaviour
 
     private void PlayerHit()
     {
+        hit();
         GetComponent<AudioSource>().clip = hitAudio;
         GetComponent<AudioSource>().Play();
         GetComponent<SphereCollider>().enabled = false;

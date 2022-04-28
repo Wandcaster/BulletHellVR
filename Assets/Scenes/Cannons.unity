@@ -1348,7 +1348,19 @@ MonoBehaviour:
   restoreOriginalParent: 0
   onPickUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1875643215}
+        m_TargetAssemblyTypeName: GameStart, Assembly-CSharp
+        m_MethodName: Game
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1940829140}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDetachFromHand:
     m_PersistentCalls:
       m_Calls: []
@@ -1463,7 +1475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cbd6113c0049b4f9684a7dd76b995c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ForceMultiplier: 100
+  ForceMultiplier: 50
 --- !u!1 &717757952
 GameObject:
   m_ObjectHideFlags: 0
@@ -4174,6 +4186,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -1056819400175914689, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
   m_PrefabInstance: {fileID: 348621112}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1875643214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875643216}
+  - component: {fileID: 1875643215}
+  m_Layer: 0
+  m_Name: GameStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1875643215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875643214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1a44eee7071234491eac8696efeba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: {fileID: 1940829140}
+--- !u!4 &1875643216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875643214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.521904, y: -12.303493, z: -5.1922717}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1886872890
 GameObject:
   m_ObjectHideFlags: 0
@@ -4332,7 +4388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1940829141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4350,6 +4406,7 @@ MonoBehaviour:
   QueueLimit: 3
   minDelay: 2
   maxDelay: 3
+  hp: 3
   targetFolder: {fileID: 1886872890}
 --- !u!4 &1940829142
 Transform:

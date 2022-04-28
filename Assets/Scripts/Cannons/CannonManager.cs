@@ -16,6 +16,8 @@ public class CannonManager : MonoBehaviour
     [SerializeField] float minDelay;
     [Tooltip("Maksymalny czas po którym pocisk mo¿e wystrzeliæ")]
     [SerializeField] float maxDelay;
+    [Tooltip("Iloœæ ¿yæ")]
+    [SerializeField] uint hp;
 
     private int currentBullets;
     private GameObject cannonFolder;
@@ -24,6 +26,8 @@ public class CannonManager : MonoBehaviour
     private DateTime timeStart;
     private System.Random rand;
     private bool[] freeCannon;
+
+
 
 
     [SerializeField] private GameObject targetFolder;
@@ -79,6 +83,7 @@ public class CannonManager : MonoBehaviour
         }
       
         targetPoints = targetFolder.transform.childCount;
+        if (hp == 0) hp = 1;
     }
 
     // Start is called before the first frame update
@@ -113,6 +118,7 @@ public class CannonManager : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
         GameObject tmp = Instantiate(bullet, spawnPos, Quaternion.identity);
+        tmp.GetComponent<Shot>().hit += DmgTaken;
         tmp.SetActive(true);
         tmp.GetComponent<Shot>().Shoot(target);
 
@@ -123,9 +129,26 @@ public class CannonManager : MonoBehaviour
         //Debug.Log("Bang");
 
         yield return new WaitForSeconds(10);
+
+        tmp.GetComponent<Shot>().hit -= DmgTaken;
+
         Destroy(tmp,10);
 
     }
 
+    private void DmgTaken()
+    {
+        hp--;
+        if (hp == 0) GameOver();
+    }
 
+    private void GameOver()
+    {
+        TimeSpan time = DateTime.UtcNow - timeStart;
+        double score = time.TotalSeconds * 2 / 7;
+        Debug.Log("wynik:" + score);
+
+
+        throw new NotImplementedException();
+    }
 }
