@@ -1697,7 +1697,7 @@ MonoBehaviour:
   m_MinValue: 1
   m_MaxValue: 20
   m_WholeNumbers: 1
-  m_Value: 5
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3612,7 +3612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonAmount: 12
   radius: 25
-  queueLimit: 0
+  queueLimit: 5
   minDelay: 2
   maxDelay: 3
   hp: 3
@@ -7700,9 +7700,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 25
-  queueLimit: 0
-  minDelay: 2
-  maxDelay: 3
+  queueLimit: 5
+  minDelay: 5
+  maxDelay: 5
   hp: 3
   readConfig: {fileID: 881620098}
   hideUI: {fileID: 621767839}
@@ -7931,7 +7931,7 @@ MonoBehaviour:
   m_MinValue: 1
   m_MaxValue: 20
   m_WholeNumbers: 1
-  m_Value: 5
+  m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
