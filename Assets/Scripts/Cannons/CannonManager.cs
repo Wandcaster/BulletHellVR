@@ -6,18 +6,23 @@ using Valve.VR.InteractionSystem;
 
 public class CannonManager : MonoBehaviour
 {
-    [Tooltip("Iloœæ dzia³ do utworzenia")]
-    [SerializeField] int cannonToSpawn;
+    //[Tooltip("Iloœæ dzia³ do utworzenia")]
+    private int cannonToSpawn;
     [Tooltip("Promieñ od gameObject w jakim ma utworzyæ dzia³a")]
     [SerializeField] float radius;
     [Tooltip("Iloœæ pocisków w kolejce o losowej czêstotliwoœci")] 
-    [SerializeField] int QueueLimit;
+    [SerializeField] int queueLimit;
     [Tooltip("Minimalny czas po którym pocisk mo¿e wystrzeliæ")]
     [SerializeField] float minDelay;
     [Tooltip("Maksymalny czas po którym pocisk mo¿e wystrzeliæ")]
     [SerializeField] float maxDelay;
     [Tooltip("Iloœæ ¿yæ")]
     [SerializeField] uint hp;
+
+    [Tooltip("Wczytaj dane z tego obiektu")]
+    [SerializeField] GameObject readConfig;
+
+    [SerializeField] GameObject hideUI;
 
     private int currentBullets;
     private GameObject cannonFolder;
@@ -54,7 +59,7 @@ public class CannonManager : MonoBehaviour
     private void FixedUpdate()
     {
         //Debug.Log(currentBullets);
-        if (currentBullets< QueueLimit) {
+        if (currentBullets< queueLimit) {
             currentBullets++;
             StartCoroutine(ShotPlayer(GenerateDelay(), Player.instance.transform, 100, GetCannonBulletSpawnPoint(ChooseRandomCannon())));
             
@@ -74,16 +79,36 @@ public class CannonManager : MonoBehaviour
 
     private void Awake()
     {
+        ReadConfig();
+
         cannonFolder = gameObject.transform.Find("Cannons").gameObject;
         bullet = gameObject.transform.Find("Bullet").gameObject;
-        freeCannon = new bool[QueueLimit];
-        for(int i = 0; i < QueueLimit; i++)
+        freeCannon = new bool[queueLimit];
+        for(int i = 0; i < queueLimit; i++)
         {
             freeCannon[i] = true;
         }
       
         targetPoints = targetFolder.transform.childCount;
-        if (hp == 0) hp = 1;
+        //if (hp == 0) hp = 1;
+
+
+
+        
+    }
+
+    private void ReadConfig()
+    {
+        UIConfig conf = readConfig.GetComponent<UIConfig>();
+        ConfigData data = conf.GetData();
+        cannonToSpawn = data.cannonAmount;
+        radius = data.radius;
+        queueLimit = data.queueLimit;
+        minDelay = data.minDelay;
+        maxDelay = data.maxDelay;
+        hp = (uint) data.hp;
+        Debug.Log(cannonToSpawn);
+        hideUI.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -144,11 +169,18 @@ public class CannonManager : MonoBehaviour
 
     private void GameOver()
     {
-        TimeSpan time = DateTime.UtcNow - timeStart;
-        double score = time.TotalSeconds * 2 / 7;
+
+        double score = GetScore();
         Debug.Log("wynik:" + score);
 
 
         throw new NotImplementedException();
     }
+    public double GetScore()
+    {
+        TimeSpan time = DateTime.UtcNow - timeStart;
+        double score = time.TotalSeconds * 2 / 7;
+        return score;
+    }
+
 }
