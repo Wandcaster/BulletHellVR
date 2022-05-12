@@ -18,6 +18,7 @@ public class Shot : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(
             power*(target.position - transform.position)
             );
+        GetComponent<FollowPlayer>().SetPointToFollow(target.gameObject);
     }
     private void OnCollisionEnter(Collision collision)
     {

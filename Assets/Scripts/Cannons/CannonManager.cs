@@ -31,7 +31,7 @@ public class CannonManager : MonoBehaviour
     private DateTime timeStart;
     private System.Random rand;
     private bool[] freeCannon;
-
+    private string targetPoint = "TargetPoint";
 
 
 
@@ -137,9 +137,9 @@ public class CannonManager : MonoBehaviour
     {
         //Debug.Log("ShotPlayer");
 
-        Transform target = targetFolder.transform.Find("TargetPoint"+rand.Next(targetPoints));
-//        Debug.Log();
-
+        Transform target = targetFolder.transform.Find(targetPoint + rand.Next(targetPoints));
+        //        Debug.Log();
+        GetComponent<FollowPlayer>().SetPointToFollow(target.gameObject);
 
         yield return new WaitForSeconds(delay);
         GameObject tmp = Instantiate(bullet, spawnPos, Quaternion.identity);
