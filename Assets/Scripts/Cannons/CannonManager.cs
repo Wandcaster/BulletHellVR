@@ -138,11 +138,9 @@ public class CannonManager : MonoBehaviour
         //Debug.Log("ShotPlayer");
 
         Transform target = targetFolder.transform.Find(targetPoint + rand.Next(targetPoints));
-        //        Debug.Log();
-        GetComponent<FollowPlayer>().SetPointToFollow(target.gameObject);
-
         yield return new WaitForSeconds(delay);
         GameObject tmp = Instantiate(bullet, spawnPos, Quaternion.identity);
+        tmp.GetComponent<FollowPlayer>().SetPointToFollow(target.gameObject);
         tmp.GetComponent<Shot>().hit += DmgTaken;
         tmp.SetActive(true);
         tmp.GetComponent<Shot>().Shoot(target);
@@ -155,7 +153,7 @@ public class CannonManager : MonoBehaviour
 
         yield return new WaitForSeconds(10);
 
-        tmp.GetComponent<Shot>().hit -= DmgTaken;
+        if(tmp!=null)tmp.GetComponent<Shot>().hit -= DmgTaken;
 
         Destroy(tmp,10);
 
@@ -174,7 +172,7 @@ public class CannonManager : MonoBehaviour
         Debug.Log("wynik:" + score);
 
 
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
     public double GetScore()
     {

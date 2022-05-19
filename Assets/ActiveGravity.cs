@@ -23,6 +23,7 @@ public class ActiveGravity : MonoBehaviour
         {
             collision.gameObject.GetComponent<Rigidbody>().useGravity = true;
             collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.gameObject.GetComponent<Rigidbody>().velocity * ForceMultiplier);
+            collision.gameObject.GetComponent<FollowPlayer>().enabled = false;
         }
     }
 }

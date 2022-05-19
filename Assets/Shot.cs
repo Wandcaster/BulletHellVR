@@ -20,17 +20,22 @@ public class Shot : MonoBehaviour
             );
         GetComponent<FollowPlayer>().SetPointToFollow(target.gameObject);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Player")) PlayerHit();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Hit");
+            PlayerHit();
+        }
+            
     }
 
     private void PlayerHit()
     {
-        hit();
+        if(hit!=null)hit();
         GetComponent<AudioSource>().clip = hitAudio;
         GetComponent<AudioSource>().Play();
-        GetComponent<SphereCollider>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<Renderer>().enabled = false;
         Destroy(gameObject,GetComponent<AudioSource>().clip.length);
     }
