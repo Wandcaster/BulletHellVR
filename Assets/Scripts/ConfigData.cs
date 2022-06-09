@@ -10,8 +10,9 @@ public class ConfigData
     public float minDelay;
     public float maxDelay;
     public int hp;
+    public int velocity;
 
-    public ConfigData(int cannonAmount, float radius, int queueLimit, float minDelay, float maxDelay, int hp)
+    public ConfigData(int cannonAmount, float radius, int queueLimit, float minDelay, float maxDelay, int hp, int velocity)
     {
         this.cannonAmount = cannonAmount;
         this.radius = radius;
@@ -19,7 +20,7 @@ public class ConfigData
         this.minDelay = minDelay;
         this.maxDelay = maxDelay;
         this.hp = hp;
-
+        this.velocity = velocity;
 
 
     }

@@ -18,6 +18,14 @@ public class CannonManager : MonoBehaviour
     [SerializeField] float maxDelay;
     [Tooltip("Iloœæ ¿yæ")]
     [SerializeField] uint hp;
+    [Tooltip("Prêdkoœæ pocisku")]
+    [SerializeField] uint velocity;
+
+
+    [Tooltip("Wybrany rodzaj dzia³ka")]
+    public string cannonName="CannonType0";
+    [Tooltip("Wybrany rodzaj pocisku")]
+    public string bulletName="Bullet0";
 
     [Tooltip("Wczytaj dane z tego obiektu")]
     [SerializeField] GameObject readConfig;
@@ -61,7 +69,7 @@ public class CannonManager : MonoBehaviour
         //Debug.Log(currentBullets);
         if (currentBullets< queueLimit) {
             currentBullets++;
-            StartCoroutine(ShotPlayer(GenerateDelay(), Player.instance.transform, 100, GetCannonBulletSpawnPoint(ChooseRandomCannon())));
+            StartCoroutine(ShotPlayer(GenerateDelay(), Player.instance.transform, velocity));
             
         }
     }
@@ -81,8 +89,8 @@ public class CannonManager : MonoBehaviour
     {
         ReadConfig();
 
+
         cannonFolder = gameObject.transform.Find("Cannons").gameObject;
-        bullet = gameObject.transform.Find("Bullet").gameObject;
         freeCannon = new bool[queueLimit];
         for(int i = 0; i < queueLimit; i++)
         {
@@ -107,6 +115,7 @@ public class CannonManager : MonoBehaviour
         minDelay = data.minDelay;
         maxDelay = data.maxDelay;
         hp = (uint) data.hp;
+        velocity = (uint)data.velocity;
         Debug.Log(cannonToSpawn);
         hideUI.SetActive(false);
     }
@@ -122,7 +131,8 @@ public class CannonManager : MonoBehaviour
     }
     private void SpawnCannons(int amountToSpawn, float r)
     {
-        GameObject cannon = gameObject.transform.Find("Presets").Find("Cannon0").gameObject;
+        GameObject cannon = gameObject.transform.Find("Presets").Find(cannonName).gameObject;
+        bullet = gameObject.transform.Find(bulletName).gameObject;
         for (int i = 0; i < amountToSpawn; i++)
         {
             float angle = i * Mathf.PI * 2f / amountToSpawn;
@@ -133,14 +143,25 @@ public class CannonManager : MonoBehaviour
             go.SetActive(true);
         }
     }
-    IEnumerator ShotPlayer(float delay, Transform playerPosition, float force, Vector3 spawnPos)
+    public void ChangeCannon(string cannonName)
+    {
+        Debug.Log("zmieniam dzialo " + cannonName);
+        this.cannonName = cannonName;
+    }
+    public void ChangeBullet(string bulletName)
+    {
+        Debug.Log("zmieniam pocisk " + bulletName);
+        this.bulletName = bulletName;
+    }
+    IEnumerator ShotPlayer(float delay, Transform playerPosition, float force)
     {
         //Debug.Log("ShotPlayer");
+        yield return new WaitForSeconds(delay);
 
         Transform target = targetFolder.transform.Find(targetPoint + rand.Next(targetPoints));
-        yield return new WaitForSeconds(delay);
-        GameObject tmp = Instantiate(bullet, spawnPos, Quaternion.identity);
+        GameObject tmp = Instantiate(bullet, GetCannonBulletSpawnPoint(ChooseRandomCannon()), Quaternion.identity);
         tmp.GetComponent<FollowPlayer>().SetPointToFollow(target.gameObject);
+        tmp.GetComponent<Shot>().power = velocity;
         tmp.GetComponent<Shot>().hit += DmgTaken;
         tmp.SetActive(true);
         tmp.GetComponent<Shot>().Shoot(target);

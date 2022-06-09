@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour
 {
-    [SerializeField] float power;
+    [SerializeField] public float power;
     [SerializeField]
     AudioClip hitAudio;
 
@@ -19,6 +19,12 @@ public class Shot : MonoBehaviour
             power*(target.position - transform.position)
             );
         GetComponent<FollowPlayer>().SetPointToFollow(target.gameObject);
+        StartCoroutine(DisableFollowPlayer());
+    }
+    IEnumerator DisableFollowPlayer()
+    {
+        yield return new WaitForSeconds(1);
+        GetComponent<FollowPlayer>().enabled = false;
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -35,7 +41,7 @@ public class Shot : MonoBehaviour
         if(hit!=null)hit();
         GetComponent<AudioSource>().clip = hitAudio;
         GetComponent<AudioSource>().Play();
-        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<Collider>().enabled = false;
         GetComponent<Renderer>().enabled = false;
         Destroy(gameObject,GetComponent<AudioSource>().clip.length);
     }

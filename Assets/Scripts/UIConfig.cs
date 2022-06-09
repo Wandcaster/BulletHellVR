@@ -11,6 +11,8 @@ public class UIConfig : MonoBehaviour
     [SerializeField] public float minDelay;
     [SerializeField] public float maxDelay;
     [SerializeField] public int hp;
+    [SerializeField] public int velocity;
+
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class UIConfig : MonoBehaviour
         tmp.Add(minDelay.ToString());
         tmp.Add(maxDelay.ToString());
         tmp.Add(hp.ToString());
+        tmp.Add(velocity.ToString());
         tmp.Add("Start".ToString());
 
         int i = 0;
@@ -48,9 +51,10 @@ public class UIConfig : MonoBehaviour
         minDelay = (int)gameObject.transform.Find("Min Delay").Find("Slider").GetComponent<Slider>().value;
         maxDelay = (int)gameObject.transform.Find("Max Delay").Find("Slider").GetComponent<Slider>().value;
         hp = (int)gameObject.transform.Find("HP").Find("Slider").GetComponent<Slider>().value;
+        velocity = (int)gameObject.transform.Find("BulletSpeed").Find("Slider").GetComponent<Slider>().value;
 
         Debug.Log(cannonAmount + "|" + radius + "|" + queueLimit + "|" + minDelay + "|" + maxDelay + "|" + hp);
-        return new ConfigData(cannonAmount, radius, queueLimit, minDelay, maxDelay, hp);
+        return new ConfigData(cannonAmount, radius, queueLimit, minDelay, maxDelay, hp, velocity);
     }
 
 
