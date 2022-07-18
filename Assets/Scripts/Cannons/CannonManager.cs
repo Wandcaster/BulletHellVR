@@ -41,6 +41,9 @@ public class CannonManager : MonoBehaviour
     private bool[] freeCannon;
     private string targetPoint = "TargetPoint";
 
+    public bool gameOver = false;
+
+
 
 
     [SerializeField] private GameObject targetFolder;
@@ -191,7 +194,7 @@ public class CannonManager : MonoBehaviour
 
         double score = GetScore();
         Debug.Log("wynik:" + score);
-
+        gameOver = true;
 
         //throw new NotImplementedException();
     }

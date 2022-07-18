@@ -5405,9 +5405,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 524262551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd0f4126d1069ae4f9b7b908515103cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 46e21a572b534694d8d1fdb5e0d557e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cannonManager: {fileID: 1940829141}
 --- !u!114 &524262554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10424,6 +10425,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6448526884845150325, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
   m_PrefabInstance: {fileID: 1157836421}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1032310930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1206214085391595134, guid: 708b12f06c9468148b4015072618e5c7, type: 3}
+  m_PrefabInstance: {fileID: 2052582052417565372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1032310935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032310930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8cbd6113c0049b4f9684a7dd76b995c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForceMultiplier: 50
 --- !u!1001 &1032743730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10682,7 +10701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18758,7 +18777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.17274213, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -19442,10 +19461,11 @@ MonoBehaviour:
   maxDelay: 5
   hp: 3
   velocity: 0
-  cannonName: Cannon0
-  bulletName: Bullet0
+  cannonName: Cannon1
+  bulletName: Bullet1
   readConfig: {fileID: 881620098}
   hideUI: {fileID: 621767839}
+  gameOver: 0
   targetFolder: {fileID: 665365420}
 --- !u!4 &1940829142
 Transform:
